@@ -1,9 +1,9 @@
 {
-  "manifest_version": 2,
   "name": "lol-teleport",
+  "manifest_version": 3,
   "version": "1.0",
   "description": "Open the existing summoner on a different League of Legends stats website",
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html"
   }
 }
