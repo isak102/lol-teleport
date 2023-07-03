@@ -21,4 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('mobalytics_btn').addEventListener('click', function() {
     open_website("app.mobalytics.gg");
   });
+  
+  document.getElementById('deeplol_btn').addEventListener('click', function() {
+    open_website("deeplol.gg");
+  });
 });
