@@ -74,8 +74,8 @@ function open_ugg(server, summoner_name) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  var opgg_btn = document.getElementById('opggBtn');
-  var ugg_btn = document.getElementById('uggBtn');
+  var opgg_btn = document.getElementById('opgg_btn');
+  var ugg_btn = document.getElementById('ugg_btn');
 
   opgg_btn.addEventListener('click', function() {
     handle_website(open_opgg);
