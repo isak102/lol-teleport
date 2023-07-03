@@ -15,7 +15,6 @@ function get_domain(url) {
 function handle_website(opener) {
   get_url().then(url => {
     let domain = get_domain(url);
-    console.log(domain);
 
     switch (domain) {
       case "op.gg":
@@ -23,9 +22,12 @@ function handle_website(opener) {
         opener(opgg_result.server, opgg_result.summoner_name);
         break;
       case "u.gg":
-        console.log("url");
         let ugg_result = parse_ugg(url);
         opener(ugg_result.server, ugg_result.summoner_name);
+        break;
+      case "xdx.gg":
+        let xdx_result = parse_xdx(url);
+        opener(xdx_result.server, xdx_result.summoner_name);
         break;
       default:
         console.log("Website not supported");
@@ -73,15 +75,30 @@ function open_ugg(server, summoner_name) {
   window.open(url, "_blank");
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  var opgg_btn = document.getElementById('opgg_btn');
-  var ugg_btn = document.getElementById('ugg_btn');
+function parse_xdx(url) {
+  let parts = url.split("/");
+  let server = parts[3];
+  let summoner_name = parts[4];
 
-  opgg_btn.addEventListener('click', function() {
+  return { server: server, summoner_name: summoner_name };
+}
+
+function open_xdx(server, summoner_name) {
+  let url = "https://xdx.gg/" + server + "/" + summoner_name;
+  window.open(url, "_blank");
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  document.getElementById('opgg_btn').addEventListener('click', function() {
     handle_website(open_opgg);
   });
 
-  ugg_btn.addEventListener('click', function() {
+  document.getElementById('ugg_btn').addEventListener('click', function() {
     handle_website(open_ugg);
+  });
+
+  document.getElementById('xdx_btn').addEventListener('click', function() {
+    handle_website(open_xdx);
   });
 });
