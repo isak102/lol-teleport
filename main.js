@@ -1,6 +1,7 @@
 import { parse_opgg } from './opgg.js';
 import { parse_ugg } from './ugg.js';
 import { parse_xdx } from './xdx.js';
+import { parse_leagueofgraphs } from './leagueofgraphs.js';
 
 function get_url() {
   return new Promise((resolve, reject) => {
@@ -32,6 +33,10 @@ export function handle_website(opener) {
       case "xdx.gg":
         let xdx_result = parse_xdx(url);
         opener(xdx_result.server, xdx_result.summoner_name);
+        break;
+      case "leagueofgraphs.com":
+        let log_result = parse_leagueofgraphs(url);
+        opener(log_result.server, log_result.summoner_name);
         break;
       default:
         console.log("Website not supported");
