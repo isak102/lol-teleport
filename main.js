@@ -59,6 +59,7 @@ export function open_website(website) {
     let ugg = new Website(5, 6, "https://u.gg/lol/profile/SERVER/SUMMONER_NAME/overview", "u.gg", false);
     let xdx = new Website(3, 4, "https://xdx.gg/SERVER/SUMMONER_NAME", "xdx.gg", true);
     let leagueofgraphs = new Website(4, 5, "https://www.leagueofgraphs.com/summoner/SERVER/SUMMONER_NAME", "leagueofgraphs.com", true);
+    let mobalytics = new Website(5, 6, "https://app.mobalytics.gg/lol/profile/SERVER/SUMMONER_NAME/overview", "app.mobalytics.gg", true)
 
     let supported_websites = new Map();
 
@@ -66,6 +67,7 @@ export function open_website(website) {
     supported_websites.set(ugg.domain, ugg);
     supported_websites.set(xdx.domain, xdx);
     supported_websites.set(leagueofgraphs.domain, leagueofgraphs);
+    supported_websites.set(mobalytics.domain, mobalytics);
 
     let current_website = supported_websites.get(current_domain);
     if (current_website) {

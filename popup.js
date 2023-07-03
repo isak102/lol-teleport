@@ -17,4 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('leagueofgraphs_btn').addEventListener('click', function() {
     open_website("leagueofgraphs.com");
   });
+  
+  document.getElementById('mobalytics_btn').addEventListener('click', function() {
+    open_website("app.mobalytics.gg");
+  });
 });
