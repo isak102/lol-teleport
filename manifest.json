@@ -5,5 +5,8 @@
   "description": "Open the existing summoner on a different League of Legends stats website",
   "action": {
     "default_popup": "popup.html"
-  }
+  },
+  "permissions": [
+    "tabs"
+  ]
 }
