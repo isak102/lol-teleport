@@ -19,8 +19,16 @@ function handle_website(opener) {
 
     switch (domain) {
       case "op.gg":
-        let result = parse_opgg(url);
-        opener(result.server, result.summoner_name);
+        let opgg_result = parse_opgg(url);
+        opener(opgg_result.server, opgg_result.summoner_name);
+        break;
+      case "u.gg":
+        console.log("url");
+        let ugg_result = parse_ugg(url);
+        opener(ugg_result.server, ugg_result.summoner_name);
+        break;
+      default:
+        console.log("Website not supported");
         break;
     }
   });
@@ -39,6 +47,32 @@ function open_opgg(server, summoner_name) {
   window.open(url, "_blank");
 }
 
+function parse_ugg(url) {
+  let parts = url.split("/");
+  let server = parts[5].replace(/\d/g, "");
+  let summoner_name = parts[6];
+
+  return { server: server, summoner_name: summoner_name };
+}
+
+function open_ugg(server, summoner_name) {
+  let new_server;
+  switch (server) {
+    case "euw":
+      new_server = "euw1";
+      break;
+    case "na":
+      new_server = "na1";
+      break;
+    default:
+      new_server = server;
+      break;
+  }
+
+  let url = "https://u.gg/lol/profile/" + new_server + "/" + summoner_name;
+  window.open(url, "_blank");
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   var opgg_btn = document.getElementById('opggBtn');
   var ugg_btn = document.getElementById('uggBtn');
@@ -48,6 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   ugg_btn.addEventListener('click', function() {
-    // TODO: implement
+    handle_website(open_ugg);
   });
 });
