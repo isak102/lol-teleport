@@ -7,8 +7,12 @@
     "default_popup": "popup.html"
   },
   "permissions": [
-    "tabs"
+    "tabs",
+    "nativeMessaging"
   ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "icons": {
     "48": "./icons/48.png",
     "64": "./icons/64.png",

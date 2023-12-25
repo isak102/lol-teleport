@@ -1,0 +1,9 @@
+{
+  "name": "com.lol_teleport.open_lol_lp",
+  "description": "Native messaging host for opening lol-lp",
+  "path": "[PATH TO lol-lp_host.py]",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://[ID OF EXTENSION]/"
+  ]
+}
