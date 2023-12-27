@@ -12,11 +12,13 @@ export function open_website(website) {
       let { server, summoner_name } = current_website.parse(url);
       let target_website = supported_websites.get_website(website)
       target_website.open(server, summoner_name);
+    } else {
+      console.error('Website not supported');
     }
   });
 }
 
-export function open_lollp() { // TODO: implement this
+export function open_lollp() {
   get_url().then(url => {
     let current_domain = get_domain(url);
     let supported_websites = new SupportedWebsites();
@@ -35,6 +37,8 @@ export function open_lollp() { // TODO: implement this
             console.error('No response from the native host');
           }
         });
+    } else {
+      console.error('Website not supported');
     }
   });
 }
