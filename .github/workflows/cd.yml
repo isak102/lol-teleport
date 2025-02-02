@@ -1,0 +1,31 @@
+name: Deploy to CWS
+
+# https://github.com/marketplace/actions/chrome-extension-upload-action
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  deploy:
+    name: Deploy chrome extension
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - run: bun install
+      - run: bun run zip
+      - name: Upload & release
+        uses: mnao305/chrome-extension-upload@v5.0.0
+        with:
+          file-path: dist/lol-teleport.zip
+          extension-id: difdjodjenlnfnokdnhppeelebgofihk
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
+          publish: true
