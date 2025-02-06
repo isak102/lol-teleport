@@ -44,10 +44,7 @@ const supportedSites = [
     domain: "https://xdx.gg",
     pattern: `/<gameName>-<tagLine>`,
     parseRegion: () => {
-      return document
-        .querySelector(".SummonerInfo_rank__7K8uK")
-        ?.textContent?.match(/on (\w+)$/)?.[1]
-        ?.toLowerCase();
+      return document.querySelector('[class^="SummonerInfo_region__"]')?.textContent?.toLowerCase();
     },
   },
   {

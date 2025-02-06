@@ -19,7 +19,7 @@ jobs:
           bun-version: latest
 
       - run: bun install
-      - run: bun run package
+      - run: bun run zip
       - name: Upload & release
         uses: mnao305/chrome-extension-upload@v5.0.0
         with:

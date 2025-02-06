@@ -6,7 +6,11 @@ export const analytics = {
   init: (page: "popup" | "options", extraData?: object) => {
     const startTime = performance.now();
 
-    import("posthog-js/dist/module.full.no-external").then((module) => {
+    // TODO: Keep track of these issues and confirm when they do not include any obfuscated code, so I can include
+    // the full posthog module and enable recording.
+    // https://github.com/rrweb-io/rrweb/issues/1578
+    // https://github.com/PostHog/posthog-js/issues/1464
+    import("posthog-js/dist/module.no-external").then((module) => {
       const posthog = module.default as unknown as PostHog;
       const loadTime = performance.now() - startTime;
 
@@ -32,7 +36,7 @@ export const analytics = {
   },
 
   capture: (...args: Parameters<PostHog["capture"]>) => {
-    import("posthog-js/dist/module.full.no-external").then((module) => {
+    import("posthog-js/dist/module.no-external").then((module) => {
       const posthog = module.default as unknown as PostHog;
       posthog.capture(
         args[0],

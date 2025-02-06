@@ -1,40 +1,6 @@
 {
-  "extends": "@tsconfig/svelte/tsconfig.json",
+  "extends": "./.wxt/tsconfig.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "resolveJsonModule": true,
-    /**
-     * Typecheck JS in `.svelte` and `.js` files by default.
-     * Disable checkJs if you'd like to use dynamic types in JS.
-     * Note that setting allowJs false does not prevent the use
-     * of JS in `.svelte` files.
-     */
-    "allowJs": true,
-    "checkJs": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
-
-    "plugins": [
-      {
-        "name": "typescript-svelte-plugin",
-        "assumeIsSvelteProject": true
-      }
-    ],
-
-    "paths": {
-      "$lib/*": ["./src/lib/*"],
-      "$lib": ["./src/lib"],
-      "$components/*": ["./src/components/*"],
-      "$components": ["./src/components"],
-      "$hooks/*": ["./src/hooks/*"],
-      "$hooks": ["./src/hooks"],
-      "$analytics/*": ["./src/analytics/*"],
-      "$analytics": ["./src/analytics"]
-    }
-  },
-  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte", "test/**/*.ts"],
-  // https://github.com/vitejs/vite/issues/18139
-  "references": [{ "path": "./tsconfig.node.json" }]
+    "useDefineForClassFields": true
+  }
 }

@@ -2,10 +2,10 @@
   import { SITES, type SiteDomain } from "$lib/sites";
   import { ModeWatcher } from "mode-watcher";
   import { onMount } from "svelte";
-  import SiteButton from "./site-button.svelte";
+  import SiteButton from "$components/popup/site-button.svelte";
   import { extractDomain } from "$lib/utils";
   import { extractAccount } from "$lib/url";
-  import ThemeSwitch from "../ui/theme-switch.svelte";
+  import ThemeSwitch from "$components/ui/theme-switch.svelte";
   import { analytics } from "$analytics";
   import type { Account } from "$lib/types";
 
@@ -63,7 +63,7 @@
 <ModeWatcher />
 <div class="flex h-[300px] w-[400px] flex-col gap-2 p-2">
   <div class="flex items-center justify-center gap-2 border-b-2 pb-2">
-    <img src="/src/assets/icons/icon-48.png" alt="Icon" />
+    <img src="/icon-48.png" alt="Icon" />
     <h1 class="text-4xl font-bold">{extensionName}</h1>
   </div>
   <div class="flex flex-col items-center justify-center">
