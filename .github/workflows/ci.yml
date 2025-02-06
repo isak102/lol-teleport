@@ -1,24 +1,40 @@
+---
 name: Format, lint and build
 
 on:
   push:
     branches: ["**"]
+    tags: ["**"]
   pull_request:
     branches: ["**"]
 
 jobs:
-  ci:
+  format:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      # Install dependencies
       - run: bun install
-      # Check format
       - run: bun run format:check
-      # Lint
+
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install
       - run: bun run lint
-      # Build
+
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install
       - run: bun run build
