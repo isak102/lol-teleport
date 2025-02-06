@@ -4,13 +4,9 @@ import { defineConfig } from "wxt";
 export default defineConfig({
   srcDir: "src",
   alias: {
-    "$lib/*": "./src/lib/*",
     $lib: "./src/lib",
-    "$components/*": "./src/components/*",
     $components: "./src/components",
-    "$hooks/*": "./src/hooks/*",
     $hooks: "./src/hooks",
-    "$analytics/*": "./src/analytics/*",
     $analytics: "./src/analytics",
   },
   extensionApi: "chrome",
