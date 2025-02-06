@@ -13,6 +13,7 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "postinstall": "wxt prepare",
     "test": "vitest",
+    "test:run": "vitest run",
     "format:write": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint ."
