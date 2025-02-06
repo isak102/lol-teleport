@@ -12,6 +12,8 @@ test("should result in identical account after generating and extracting", async
 
   for (const site of Object.values(SITES)) {
     const url = generateUrl(site, originalAcc);
+
+    delete site.parseRegion; // Cant parse region from DOM in tests
     const extractedAcc = await extractAccount(site, url!);
 
     let expectedAcc = originalAcc;
