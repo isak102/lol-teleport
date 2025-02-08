@@ -1,6 +1,13 @@
 {
   "extends": "./.wxt/tsconfig.json",
   "compilerOptions": {
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
+
+    "plugins": [
+      {
+        "name": "typescript-svelte-plugin",
+        "assumeIsSvelteProject": true
+      }
+    ]
   }
 }
