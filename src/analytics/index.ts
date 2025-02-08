@@ -3,7 +3,7 @@ import type { PostHog } from "posthog-js";
 import { version as extensionVersion } from "../../package.json";
 
 export const analytics = {
-  init: (page: "popup" | "options", extraData?: object) => {
+  init: function (page: "popup" | "options", extraData?: object) {
     const startTime = performance.now();
 
     // TODO: Keep track of these issues and confirm when they do not include any obfuscated code, so I can include
@@ -22,20 +22,11 @@ export const analytics = {
         capture_pageleave: true,
       });
 
-      posthog.capture(
-        "$pageview",
-        {
-          page,
-          extensionVersion,
-          posthogLoadMs: loadTime,
-          ...extraData,
-        },
-        { send_instantly: true },
-      );
+      this.capture("$pageview", { page, posthogLoadMs: Number(loadTime.toFixed(2)), ...extraData });
     });
   },
 
-  capture: (...args: Parameters<PostHog["capture"]>) => {
+  capture: function (...args: Parameters<PostHog["capture"]>) {
     import("posthog-js/dist/module.no-external").then((module) => {
       const posthog = module.default as unknown as PostHog;
       posthog.capture(
@@ -53,5 +44,5 @@ export const analytics = {
     SITE_TELEPORT: "site_teleport",
     THEME_CHANGED: "theme_changed",
     THEME_MENU_OPENED: "theme_menu_opened",
-  } as const,
-};
+  },
+} as const;
