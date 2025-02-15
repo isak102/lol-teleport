@@ -1,3 +1,4 @@
+---
 name: Deploy to CWS
 
 # https://github.com/marketplace/actions/chrome-extension-upload-action
@@ -8,12 +9,16 @@ on:
       - "*"
 
 jobs:
+  checks:
+    uses: ./.github/workflows/checks.yml
+
   deploy:
     name: Deploy chrome extension
+    needs: [checks]
     runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
