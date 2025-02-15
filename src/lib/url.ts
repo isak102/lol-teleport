@@ -29,7 +29,8 @@ export async function extractAccount(site: Site, url: string) {
     .replace(/<(\w+)>/g, "(?<$1>[^/]+)");
 
   const regex = new RegExp(patternToRegex);
-  const match = decodeURIComponent(url).match(regex);
+  const urlWithoutQueryParams = url.replace(/\?[^?]*$/, "");
+  const match = decodeURIComponent(urlWithoutQueryParams).match(regex);
 
   if (!match?.groups) {
     throw new Error("Invalid URL");
