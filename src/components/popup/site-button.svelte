@@ -16,7 +16,7 @@
     url: string;
     toSite: Site;
     fromSite?: Site;
-    account?: Account;
+    account: Account | null;
   } = $props();
 
   let newUrl = $state<string | null>(null);

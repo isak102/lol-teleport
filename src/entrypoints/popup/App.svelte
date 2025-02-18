@@ -9,7 +9,7 @@
   import type { Account } from "$lib/types";
 
   let currentTab = $state<chrome.tabs.Tab | undefined>();
-  let account = $state<Account | undefined>();
+  let account = $state<Account | null>(null);
 
   let currentSite = $derived.by(() => {
     if (currentTab?.url) {
@@ -32,6 +32,7 @@
 
     account = await (async () => {
       if (currentSite && currentTab?.url) return currentSite.extractAccount(currentTab!.url!);
+      else return null;
     })();
 
     analytics.init("popup", { currentSite, currentTab });
@@ -70,6 +71,8 @@
       <p class="text-xl">
         {`${account.gameName}#${account.tagLine}`}
       </p>
+    {:else if currentSite && !account}
+      <p class="px-8 text-center text-xl">Could not find account.</p>
     {:else}
       <p class="px-8 text-center text-xl">{extensionName} is not supported on this site :(</p>
     {/if}

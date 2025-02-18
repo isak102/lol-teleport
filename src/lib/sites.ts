@@ -28,8 +28,8 @@ const supportedSites = [
       const slug = await getLolPros(account.gameName, account.tagLine);
       return slug ? `https://lolpros.gg/player/${slug}` : null;
     },
-    async extractAccount() {
-      return _lolProsExtractAccount();
+    async extractAccount(url: string) {
+      return _lolProsExtractAccount(url);
     },
   },
   {

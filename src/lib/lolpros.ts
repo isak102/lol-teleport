@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { Account } from "./types";
+import { analytics } from "$analytics";
 
 const responseSchema = z.array(
   z.object({
@@ -20,7 +21,7 @@ export async function getLolPros(gameName: string, tagLine: string) {
   }
 }
 
-export async function _lolProsExtractAccount() {
+export async function _lolProsExtractAccount(url: string) {
   const account = await new Promise<string | null>((resolve) => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       chrome.scripting.executeScript(
@@ -43,7 +44,16 @@ export async function _lolProsExtractAccount() {
     });
   });
 
-  const [gameName, tagLine] = account!.split("#");
+  if (!account) {
+    analytics.capture(analytics.events.ACCOUNT_PARSE_FAILED, {
+      site: {
+        slug: "lolpros",
+      },
+      currentUrl: url,
+    });
+    return null;
+  }
 
+  const [gameName, tagLine] = account.split("#");
   return { gameName, tagLine, region: "euw1" } as Account;
 }

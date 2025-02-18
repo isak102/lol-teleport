@@ -20,7 +20,7 @@ test("should result in identical account after generating and extracting", async
     let expectedAcc = originalAcc;
     if (site.domain == "https://xdx.gg") {
       expectedAcc = {
-        ...extractedAcc,
+        ...expectedAcc,
         region: undefined,
       };
     }

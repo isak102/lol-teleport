@@ -1,3 +1,4 @@
+import { analytics } from "$analytics";
 import { convertRegion, type NormalRegion, type UggRegion } from "$lib/regions";
 import type { Account, Site } from "$lib/types";
 
@@ -21,7 +22,7 @@ export function _defaultGenerateUrl(site: Site, account: Account) {
 
 export async function _defaultExtractAccount(site: Site, url: string) {
   if (!url.startsWith(site.domain)) {
-    throw new Error("Incorrect domain.");
+    return null;
   }
 
   const patternToRegex = site.pattern
@@ -33,7 +34,11 @@ export async function _defaultExtractAccount(site: Site, url: string) {
   const match = decodeURIComponent(urlWithoutQueryParams).match(regex);
 
   if (!match?.groups) {
-    throw new Error("Invalid URL");
+    analytics.capture(analytics.events.ACCOUNT_PARSE_FAILED, {
+      site,
+      currentUrl: url,
+    });
+    return null;
   }
 
   // Initially assign region from the URL groups, if available.

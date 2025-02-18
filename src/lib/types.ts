@@ -12,7 +12,7 @@ export interface Site {
   domain: string;
   pattern: string;
   generateUrl: (account: Account) => Promise<string | null>;
-  extractAccount: (url: string) => Promise<Account>;
+  extractAccount: (url: string) => Promise<Account | null>;
   parseRegion?: () => string | undefined;
   usesUggRegion?: boolean;
 }

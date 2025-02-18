@@ -44,5 +44,6 @@ export const analytics = {
     SITE_TELEPORT: "site_teleport",
     THEME_CHANGED: "theme_changed",
     THEME_MENU_OPENED: "theme_menu_opened",
+    ACCOUNT_PARSE_FAILED: "account_parse_fail",
   },
 } as const;
