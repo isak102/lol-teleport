@@ -1,7 +1,7 @@
 {
   "name": "lol-teleport",
   "description": "Easily jump between the same player on different League of Legends stats websites. Supports OP.GG, U.GG, Deeplol, and more.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "module",
   "scripts": {
     "dev": "wxt",
