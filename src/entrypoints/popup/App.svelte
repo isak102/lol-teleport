@@ -77,7 +77,7 @@
       <p class="px-8 text-center text-xl">{extensionName} is not supported on this site :(</p>
     {/if}
   </div>
-  <div class="flex flex-wrap justify-center gap-2">
+  <div class="flex flex-wrap justify-center gap-2 px-2 pb-4">
     {#each Object.values(SITES) as site}
       <SiteButton
         url={currentTab?.url ?? ""}
