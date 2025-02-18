@@ -2,7 +2,6 @@
   import { analytics } from "$analytics";
   import { Button, type ButtonProps } from "$components/ui/button";
   import type { Account, Site } from "$lib/types";
-  import { generateUrl } from "$lib/url";
   import { cn } from "$lib/utils";
 
   let {
@@ -20,8 +19,9 @@
     account?: Account;
   } = $props();
 
-  let newUrl = $derived.by(() => {
-    if (account) return generateUrl(toSite, $state.snapshot(account));
+  let newUrl = $state<string | null>(null);
+  $effect(() => {
+    if (account) toSite.generateUrl($state.snapshot(account)).then((url) => (newUrl = url));
   });
 </script>
 

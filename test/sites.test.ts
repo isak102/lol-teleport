@@ -1,7 +1,6 @@
 import { expect, test } from "vitest";
 import type { Account } from "$lib/types";
 import { SITES } from "$lib/sites";
-import { extractAccount, generateUrl } from "$lib/url";
 
 test("should result in identical account after generating and extracting", async () => {
   const originalAcc: Account = {
@@ -11,10 +10,12 @@ test("should result in identical account after generating and extracting", async
   };
 
   for (const site of Object.values(SITES)) {
-    const url = generateUrl(site, originalAcc);
+    if (site.slug == "lolpros") continue;
+
+    const url = await site.generateUrl(originalAcc);
 
     delete site.parseRegion; // Cant parse region from DOM in tests
-    const extractedAcc = await extractAccount(site, url!);
+    const extractedAcc = await site.extractAccount(url!);
 
     let expectedAcc = originalAcc;
     if (site.domain == "https://xdx.gg") {
@@ -32,7 +33,7 @@ test("it handles url with query param", async () => {
   const url =
     "https://www.dodgetracker.com/region/kr/player/Hide%20on%20bush-KR1?timePeriod=allTime";
 
-  const extractedAcc = await extractAccount(SITES["https://www.dodgetracker.com"], url);
+  const extractedAcc = await SITES["https://www.dodgetracker.com"].extractAccount(url);
 
   const expectedAcc: Account = {
     gameName: "Hide on bush",
@@ -47,7 +48,7 @@ test("it handles accounts with ? in them", async () => {
   const url =
     "https://www.dodgetracker.com/region/kr/player/Hi?de%20on%20bush-KR1?timePeriod=allTime";
 
-  const extractedAcc = await extractAccount(SITES["https://www.dodgetracker.com"], url);
+  const extractedAcc = await SITES["https://www.dodgetracker.com"].extractAccount(url);
 
   const expectedAcc: Account = {
     gameName: "Hi?de on bush",

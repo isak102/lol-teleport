@@ -11,6 +11,8 @@ export interface Site {
   slug: string;
   domain: string;
   pattern: string;
+  generateUrl: (account: Account) => Promise<string | null>;
+  extractAccount: (url: string) => Promise<Account>;
   parseRegion?: () => string | undefined;
   usesUggRegion?: boolean;
 }

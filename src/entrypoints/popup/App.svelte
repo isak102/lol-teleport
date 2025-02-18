@@ -4,7 +4,6 @@
   import { onMount } from "svelte";
   import SiteButton from "$components/popup/site-button.svelte";
   import { extractDomain } from "$lib/utils";
-  import { extractAccount } from "$lib/url";
   import ThemeSwitch from "$components/ui/theme-switch.svelte";
   import { analytics } from "$analytics";
   import type { Account } from "$lib/types";
@@ -32,8 +31,7 @@
     })();
 
     account = await (async () => {
-      if (currentSite && currentTab?.url)
-        return await extractAccount(currentSite!, currentTab!.url!);
+      if (currentSite && currentTab?.url) return currentSite.extractAccount(currentTab!.url!);
     })();
 
     analytics.init("popup", { currentSite, currentTab });
@@ -46,7 +44,7 @@
     if (currentTab && currentSite && !account?.region) {
       interval = setInterval(async () => {
         if (currentSite && currentTab?.url) {
-          const res = await extractAccount(currentSite!, currentTab!.url!);
+          const res = await currentSite.extractAccount(currentTab!.url!);
           if (res) account = res;
         }
       }, 1000);

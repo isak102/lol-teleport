@@ -3,7 +3,7 @@ import type { Account, Site } from "$lib/types";
 
 type Params = keyof Account;
 
-export function generateUrl(site: Site, account: Account) {
+export function _defaultGenerateUrl(site: Site, account: Account) {
   if (account.region) {
     account.region = convertRegion(account.region, site.usesUggRegion ?? false);
   }
@@ -19,7 +19,7 @@ export function generateUrl(site: Site, account: Account) {
   );
 }
 
-export async function extractAccount(site: Site, url: string) {
+export async function _defaultExtractAccount(site: Site, url: string) {
   if (!url.startsWith(site.domain)) {
     throw new Error("Incorrect domain.");
   }

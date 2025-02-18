@@ -17,6 +17,8 @@ export default defineConfig({
   manifest: {
     name: "LoL Teleport",
     permissions: ["activeTab", "scripting"],
+
+    host_permissions: ["https://api.lolpros.gg/*"],
   },
 
   zip: {
