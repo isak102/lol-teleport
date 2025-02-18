@@ -14,6 +14,8 @@ export async function getLolPros(gameName: string, tagLine: string) {
   );
   const result = responseSchema.safeParse(await response.json());
 
+  analytics.capture(analytics.events.LOLPROS_QUERY, { gameName, tagLine, result });
+
   if (!result.success) {
     return null;
   } else {

@@ -45,5 +45,6 @@ export const analytics = {
     THEME_CHANGED: "theme_changed",
     THEME_MENU_OPENED: "theme_menu_opened",
     ACCOUNT_PARSE_FAILED: "account_parse_fail",
+    LOLPROS_QUERY: "lolpros_query",
   },
 } as const;
