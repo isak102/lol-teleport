@@ -49,7 +49,7 @@ const supportedSites = [
     name: "League of Graphs",
     slug: "leagueofgraphs",
     domain: "https://www.leagueofgraphs.com",
-    pattern: `/summoner/<region>/<gameName>-<tagLine>`,
+    pattern: `/summoner/*/<region>/<gameName>-<tagLine>`,
     async generateUrl(account: Account) {
       return _defaultGenerateUrl(this, account);
     },

@@ -16,7 +16,10 @@ export function _defaultGenerateUrl(site: Site, account: Account) {
   }
 
   return encodeURI(
-    site.domain + site.pattern.replace(/<(\w+)>/g, (_, key) => account[key as Params] as string),
+    site.domain +
+      site.pattern
+        .replace("*/", "")
+        .replace(/<(\w+)>/g, (_, key) => account[key as Params] as string),
   );
 }
 
@@ -26,8 +29,9 @@ export async function _defaultExtractAccount(site: Site, url: string) {
   }
 
   const patternToRegex = site.pattern
-    .replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-    .replace(/<(\w+)>/g, "(?<$1>[^/]+)");
+    .replace(/[.+?^${}()|[\]\\]/g, "\\$&")
+    .replace(/<(\w+)>/g, "(?<$1>[^/]+)")
+    .replace(/\*\//g, "(?:[^/]+/)?");
 
   const regex = new RegExp(patternToRegex);
   const urlWithoutQueryParams = url.replace(/\?[^?]*$/, "");
