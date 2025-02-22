@@ -34,7 +34,7 @@ export async function _defaultExtractAccount(site: Site, url: string) {
     .replace(/\*\//g, "(?:[^/]+/)?");
 
   const regex = new RegExp(patternToRegex);
-  const urlWithoutQueryParams = url.replace(/\?[^?]*$/, "");
+  const urlWithoutQueryParams = url.replace(/\?[^?]*$/, "").replace(/#[^#]*$/, "");
   const match = decodeURIComponent(urlWithoutQueryParams).match(regex);
 
   if (!match?.groups) {

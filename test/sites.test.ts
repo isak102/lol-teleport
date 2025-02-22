@@ -91,3 +91,31 @@ test("it handles sites with optional path segments", async () => {
 
   expect(extractedAcc).toMatchObject(expectedAcc);
 });
+
+test("it handles urls with # in them", async () => {
+  const url = "https://www.leagueofgraphs.com/summoner/br/Pitt-Pit#champions";
+
+  const extractedAcc = await SITES["https://www.leagueofgraphs.com"].extractAccount(url);
+
+  const expectedAcc: Account = {
+    gameName: "Pitt",
+    tagLine: "Pit",
+    region: "br",
+  };
+
+  expect(extractedAcc).toMatchObject(expectedAcc);
+});
+
+test("it handles urls with query params and # in them", async () => {
+  const url = "https://www.leagueofgraphs.com/summoner/br/Pitt-Pit?timePeriod=week#champions";
+
+  const extractedAcc = await SITES["https://www.leagueofgraphs.com"].extractAccount(url);
+
+  const expectedAcc: Account = {
+    gameName: "Pitt",
+    tagLine: "Pit",
+    region: "br",
+  };
+
+  expect(extractedAcc).toMatchObject(expectedAcc);
+});
