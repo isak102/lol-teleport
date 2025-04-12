@@ -14,9 +14,9 @@
     "postinstall": "wxt prepare",
     "test": "vitest",
     "test:run": "vitest run",
-    "version:major": "bump-my-version major",
-    "version:minor": "bump-my-version minor",
-    "version:patch": "bump-my-version patch",
+    "version:major": "bump-my-version bump major",
+    "version:minor": "bump-my-version bump minor",
+    "version:patch": "bump-my-version bump patch",
     "format:write": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint ."
