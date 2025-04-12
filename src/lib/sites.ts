@@ -6,7 +6,7 @@ const supportedSites = [
   {
     name: "OP.GG",
     slug: "opgg",
-    domain: "https://www.op.gg",
+    domain: "https://op.gg",
     pattern: `/summoners/<region>/<gameName>-<tagLine>`,
     async generateUrl(account: Account) {
       return _defaultGenerateUrl(this, account);

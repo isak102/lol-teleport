@@ -33,7 +33,7 @@ test("should result in identical account after generating and extracting", async
 test("should result in identical url after extracting and generating", async () => {
   const urls = [
     "https://www.leagueofgraphs.com/summoner/br/Pitt-Pit",
-    "https://www.op.gg/summoners/euw/nexus-1v9",
+    "https://op.gg/summoners/euw/nexus-1v9",
     "https://u.gg/lol/profile/euw1/nexus-1v9/overview",
   ];
 
