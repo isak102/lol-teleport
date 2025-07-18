@@ -122,7 +122,7 @@ const supportedSites = [
   },
   {
     name: "DPM.LOL",
-    slug: 'dpmlol',
+    slug: "dpmlol",
     domain: "https://dpm.lol",
     pattern: "/<gameName>-<tagLine>",
     async generateUrl(account: Account) {
@@ -132,9 +132,11 @@ const supportedSites = [
       return _defaultExtractAccount(this, url);
     },
     parseRegion: () => {
-      return document.querySelector("div.text-bxs.font-extrabold.w-fit")?.textContent?.toLowerCase();
-    }
-  }
+      return document
+        .querySelector("div.text-bxs.font-extrabold.w-fit")
+        ?.textContent?.toLowerCase();
+    },
+  },
 ] as const satisfies readonly Site[];
 
 export type SiteDomain = (typeof supportedSites)[number]["domain"];
