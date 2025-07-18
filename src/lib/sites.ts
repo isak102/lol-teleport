@@ -16,6 +16,23 @@ const supportedSites = [
     },
   },
   {
+    name: "DPM.LOL",
+    slug: "dpmlol",
+    domain: "https://dpm.lol",
+    pattern: "/<gameName>-<tagLine>",
+    async generateUrl(account: Account) {
+      return _defaultGenerateUrl(this, account);
+    },
+    async extractAccount(url: string) {
+      return _defaultExtractAccount(this, url);
+    },
+    parseRegion: () => {
+      return document
+        .querySelector("div.text-bxs.font-extrabold.w-fit")
+        ?.textContent?.toLowerCase();
+    },
+  },
+  {
     name: "LOLPros",
     slug: "lolpros",
     domain: "https://lolpros.gg",
@@ -118,23 +135,6 @@ const supportedSites = [
     },
     async extractAccount(url: string) {
       return _defaultExtractAccount(this, url);
-    },
-  },
-  {
-    name: "DPM.LOL",
-    slug: "dpmlol",
-    domain: "https://dpm.lol",
-    pattern: "/<gameName>-<tagLine>",
-    async generateUrl(account: Account) {
-      return _defaultGenerateUrl(this, account);
-    },
-    async extractAccount(url: string) {
-      return _defaultExtractAccount(this, url);
-    },
-    parseRegion: () => {
-      return document
-        .querySelector("div.text-bxs.font-extrabold.w-fit")
-        ?.textContent?.toLowerCase();
     },
   },
 ] as const satisfies readonly Site[];
