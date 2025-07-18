@@ -19,7 +19,7 @@ test("should result in identical account after generating and extracting", async
     const extractedAcc = await site.extractAccount(url!);
 
     let expectedAcc = originalAcc;
-    if (site.domain == "https://xdx.gg") {
+    if (site.domain == "https://xdx.gg" || site.domain == "https://dpm.lol") {
       expectedAcc = {
         ...expectedAcc,
         region: undefined,
