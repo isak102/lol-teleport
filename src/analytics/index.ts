@@ -2,16 +2,23 @@ import type { PostHog } from "posthog-js";
 
 import { version as extensionVersion } from "../../package.json";
 
+async function importPosthog() {
+  const [posthog, _] = await Promise.all([
+    import("posthog-js/dist/module.no-external"),
+    // TODO: Change the import below when this gets fixed
+    // https://github.com/PostHog/posthog-js/issues/1464#issuecomment-2778027739
+    // @ts-expect-error: This exists but has no types
+    import("posthog-js/dist/posthog-recorder.js"),
+  ]);
+
+  return posthog.default as unknown as PostHog;
+}
+
 export const analytics = {
   init: function (page: "popup" | "options", extraData?: object) {
     const startTime = performance.now();
 
-    // TODO: Keep track of these issues and confirm when they do not include any obfuscated code, so I can include
-    // the full posthog module and enable recording.
-    // https://github.com/rrweb-io/rrweb/issues/1578
-    // https://github.com/PostHog/posthog-js/issues/1464
-    import("posthog-js/dist/module.no-external").then((module) => {
-      const posthog = module.default as unknown as PostHog;
+    importPosthog().then((posthog) => {
       const loadTime = performance.now() - startTime;
 
       posthog.init("phc_LAv0yIeqTWaJcskIjU7kb6OLhWCHGLHnK3yVIvtjXQI", {
@@ -27,8 +34,7 @@ export const analytics = {
   },
 
   capture: function (...args: Parameters<PostHog["capture"]>) {
-    import("posthog-js/dist/module.no-external").then((module) => {
-      const posthog = module.default as unknown as PostHog;
+    importPosthog().then((posthog) => {
       posthog.capture(
         args[0],
         {

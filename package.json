@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "mode-watcher": "^0.5.1",
-    "posthog-js": "^1.215.5",
+    "posthog-js": "^1.257.0",
     "zod": "^3.24.2"
   }
 }

@@ -25,6 +25,16 @@ export default ts.config(
     },
   },
   {
+    rules: {
+      // Allow variables, parameters, and arguments with underscore prefix
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
+    },
+  },
+  {
     files: ["**/*.svelte"],
 
     languageOptions: {
