@@ -14,8 +14,14 @@ async function importPosthog() {
   return posthog.default as unknown as PostHog;
 }
 
+function isEnabled() {
+  return import.meta.env.PROD || !!import.meta.env.VITE_PUBLIC_ANALYTICS;
+}
+
 export const analytics = {
   init: function (page: "popup" | "options", extraData?: object) {
+    if (!isEnabled()) return;
+
     const startTime = performance.now();
 
     importPosthog().then((posthog) => {
@@ -34,6 +40,8 @@ export const analytics = {
   },
 
   capture: function (...args: Parameters<PostHog["capture"]>) {
+    if (!isEnabled()) return;
+
     importPosthog().then((posthog) => {
       posthog.capture(
         args[0],
